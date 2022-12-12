@@ -169,6 +169,8 @@ with open("log.txt", "w") as log:  # logging an error if it happens
         window.geometry('300x200')
         window.title('Folder creator')
         window.config(bg='#111111')
+        p1 = PhotoImage(file='icon.png')
+        window.iconphoto(False, p1)
 
         # text on screen
         w1 = Label(window, text='Insert folder name or directory:')
