@@ -2,7 +2,7 @@ import os
 from datetime import date
 from tkinter import *
 import traceback
-import time
+from darktitlebar import *
 
 with open("log.txt", "w") as log:  # logging an error if it happens
     try:
@@ -146,6 +146,19 @@ with open("log.txt", "w") as log:  # logging an error if it happens
                 if not os.path.exists(newpath):
                     os.makedirs(newpath)
 
+        def enter(self):
+            a = e.get()
+            if os.path.exists(path=a):
+                w.config(text="Folder already exists cant make one!.")
+                window.after(2000, window.update())
+                exit()
+            monthcreate()
+            window.after(1000, window.update())
+            monthfolcreate()
+            w.config(text="Folders Created.")
+            window.after(2000, window.update())
+            exit()
+
 
         def submit():  # submit button command
             global a
@@ -171,35 +184,30 @@ with open("log.txt", "w") as log:  # logging an error if it happens
         window.config(bg='#111111')
         p1 = PhotoImage(file='icon.png')
         window.iconphoto(False, p1)
+        window.bind('<Return>', enter)
+        dark_title_bar(window)
 
         # text on screen
         w1 = Label(window, text='Insert folder name or directory:')
         w1.place(x=30, y=50)
-        w1.config(bg='#111111')
-        w1.config(fg='white')
-        w1.config(font=('Arial', 13))
+        w1.config(bg='#111111', font=('Arial', 13), fg='white')
 
         # 2nd text on screen
         w = Label(window, text='')
         w.place(y=500, x=4030)
         w.pack(side=BOTTOM)
-        w.config(bg='#111111')
-        w.config(fg='white')
-        w.config(font=('Arial', 13))
+        w.config(fg='white', font=('Arial', 13), bg='#111111')
 
         # submit button
         submit = Button(window, text="Start", command=submit)
-        submit.place(y=130, x=120)
-        submit.config(bg='#111111')
-        submit.config(fg='white')
-        submit.config(font=('Arial', 13))
+        submit.place(y=130, x=110)
+        submit.config(bg='#151515', bd=0, fg='white', font=('Arial', 13), width=7)
 
         # entry box
         e = Entry()
         e.place(relx=0.5, rely=0.5, anchor=CENTER)
-        e.config(font=('Arial', 20))
-        e.config(bg='#111111')
-        e.config(fg='white')
+        e.config(font=('Arial', 20), bg='#151515', insertbackground='white', fg='white', bd=0)
+        e.focus_force()
 
         window.mainloop()
 
