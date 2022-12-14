@@ -159,7 +159,7 @@ def submit():  # submit button command
     exit()
 
 
-def enter(self):
+def enter(self):  # Return key command
     global a
     a = e.get()
     if os.path.exists(path=a):
@@ -173,6 +173,26 @@ def enter(self):
     window.after(2000, window.update())
     exit()
 
+
+def change_i():  # button img change
+    if submitbtn.image == buttonimg:
+        # start_recording()
+
+        submitbtn.config(image=buttonimg2)
+        submitbtn.image = buttonimg2
+        window.after(5, window.update())
+        submitbtn.config(image=buttonimg)
+        submitbtn.image = buttonimg
+    else:
+        # stop_recording()
+
+        submitbtn.config(image=buttonimg)
+        submitbtn.image = buttonimg
+
+
+def funcs(): # combining both change_i and submit func to work together
+    change_i()
+    submit()
 
 # creating window
 window = Tk()
@@ -189,23 +209,26 @@ dark_title_bar(window)
 # text on screen
 w1 = Label(window, text='Insert folder name or directory:')
 w1.place(x=30, y=50)
-w1.config(bg='#111111', font=('Arial', 13), fg='white')
+w1.config(bg='#111111', font=('VAG Rounded', 13), fg='white')
 
 # 2nd text on screen
 w = Label(window, text='')
 w.place(y=500, x=4030)
 w.pack(side=BOTTOM)
-w.config(fg='white', font=('Arial', 13), bg='#111111')
+w.config(fg='white', font=('VAG Rounded', 13), bg='#111111')
 
 # submit button
-submit = Button(window, text="Start", command=submit)
-submit.place(y=130, x=110)
-submit.config(bg='#151515', bd=0, fg='white', font=('Arial', 13), width=7)
+submitbtn = Button(window, text="", command=funcs)
+buttonimg = PhotoImage(file="button.png")
+submitbtn.image = buttonimg
+buttonimg2 = PhotoImage(file='button2.png')
+submitbtn.place(relx=0.5, rely=0.5, anchor=CENTER, x=115)
+submitbtn.config(bg='#111111', bd=0, fg='white', font=('VAG Rounded', 13), image=buttonimg, activebackground='#111111')
 
 # entry box
 e = Entry()
-e.place(relx=0.5, rely=0.5, anchor=CENTER)
-e.config(font=('Arial', 20), bg='#151515', insertbackground='white', fg='white', bd=0)
+e.place(relx=0.5, rely=0.5, anchor=CENTER, x=-33)
+e.config(font=('Arial', 20), bg='#151515', insertbackground='white', fg='white', bd=0, width=15)
 e.focus_force()
 
 window.mainloop()

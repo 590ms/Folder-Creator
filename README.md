@@ -8,3 +8,4 @@ each month's folder it will create folder of all the dates possible in 1 month.
 feel free to make a better version of it!
 im very new to coding python and im making projects like this for fun and to learn
 (you can use the submit button or just press enter)
+(ALL FILES NEED TO BE IN THE SAME DIRECTORY!!!)
