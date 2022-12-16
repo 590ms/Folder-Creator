@@ -2,10 +2,14 @@ import os
 from datetime import date
 from tkinter import *
 from darktitlebar import *
+import atexit
 
 today = date.today()  # getting date
 d4 = today.strftime("%Y")  # setting d4 only as current year
 
+def exittask():
+    os.remove("__pycache__/darktitlebar.cpython-311.pyc")
+    os.rmdir("__pycache__")
 
 def monthfolcreate():  # creating month folders
     newpath = fr'{a}\January'
@@ -150,12 +154,19 @@ def submit():  # submit button command
     if os.path.exists(path=a):
         w.config(text="Folder already exists cant make one!.")
         window.after(2000, window.update())
+        os.remove("__pycache__/darktitlebar.cpython-311.pyc")
+        os.rmdir("__pycache__")
         exit()
     monthcreate()
     window.after(1000, window.update())
     monthfolcreate()
     w.config(text="Folders Created.")
     window.after(2000, window.update())
+    os.remove("__pycache__/darktitlebar.cpython-311.pyc")
+    os.rmdir("__pycache__")
+    open = a
+    open = os.path.realpath(open)
+    os.startfile(open)
     exit()
 
 
@@ -165,30 +176,69 @@ def enter(self):  # Return key command
     if os.path.exists(path=a):
         w.config(text="Folder already exists cant make one!.")
         window.after(2000, window.update())
+        os.remove("__pycache__/darktitlebar.cpython-311.pyc")
+        os.rmdir("__pycache__")
         exit()
     monthcreate()
     window.after(1000, window.update())
     monthfolcreate()
     w.config(text="Folders Created.")
     window.after(2000, window.update())
+    os.remove("__pycache__/darktitlebar.cpython-311.pyc")
+    os.rmdir("__pycache__")
+    open = a
+    open = os.path.realpath(open)
+    os.startfile(open)
     exit()
 
 
 def change_i():  # button img change
     if submitbtn.image == buttonimg:
-        # start_recording()
+
 
         submitbtn.config(image=buttonimg2)
         submitbtn.image = buttonimg2
         window.after(5, window.update())
         submitbtn.config(image=buttonimg)
         submitbtn.image = buttonimg
-    else:
-        # stop_recording()
+
+    elif submitbtn.image == buttonimg3:
+
 
         submitbtn.config(image=buttonimg)
         submitbtn.image = buttonimg
+        window.after(10, window.update())
+        submitbtn.config(image=buttonimg3)
+        submitbtn.image = buttonimg3
+def change_theme():  # theme change
+    if buttn.image == buttnimg3:
 
+
+        buttn.config(bg='#111111', image=buttnimg4, activebackground='#111111')
+        window.config(bg="#111111")
+        submitbtn.image = buttonimg
+        e.config(bg="#151515", fg="white", insertbackground='white')
+        submitbtn.config(bg="#111111", image=buttonimg, activebackground="#111111")
+        w.config(bg="#111111", fg="white")
+        w1.config(bg="#111111", fg="white")
+        buttn.image = buttnimg4
+        dark_title_bar(window)
+        window.geometry(str(window.winfo_width() + 1) + "x" + str(window.winfo_height() + 1))
+        window.geometry(str(window.winfo_width() - 1) + "x" + str(window.winfo_height() - 1))
+    else:
+
+
+        buttn.config(bg='white', image=buttnimg3, activebackground='white')
+        window.config(bg="white")
+        submitbtn.image = buttonimg3
+        e.config(bg="#fafafa", fg="#111111", insertbackground='#111111')
+        submitbtn.config(bg="white", image=buttonimg3, activebackground="white")
+        w.config(bg="white", fg="#111111")
+        w1.config(bg="white", fg="#111111")
+        buttn.image = buttnimg3
+        light_title_bar(window)
+        window.geometry(str(window.winfo_width() + 1) + "x" + str(window.winfo_height() + 1))
+        window.geometry(str(window.winfo_width() - 1) + "x" + str(window.winfo_height() - 1))
 
 def funcs(): # combining both change_i and submit func to work together
     change_i()
@@ -200,35 +250,50 @@ window.eval('tk::PlaceWindow . center')
 window.resizable(False, False)
 window.geometry('300x200')
 window.title('Folder creator')
-window.config(bg='#111111')
+window.config(bg='white')
 p1 = PhotoImage(file='icon.png')
 window.iconphoto(False, p1)
 window.bind('<Return>', enter)
-dark_title_bar(window)
+light_title_bar(window)
+window.geometry(str(window.winfo_width() + 1) + "x" + str(window.winfo_height() + 1))
+window.geometry(str(window.winfo_width() - 1) + "x" + str(window.winfo_height() - 1))
 
 # text on screen
 w1 = Label(window, text='Insert folder name or directory:')
 w1.place(x=30, y=50)
-w1.config(bg='#111111', font=('VAG Rounded', 13), fg='white')
+w1.config(bg='white', font=('VAG Rounded', 13), fg='#111111')
 
 # 2nd text on screen
 w = Label(window, text='')
 w.place(y=500, x=4030)
 w.pack(side=BOTTOM)
-w.config(fg='white', font=('VAG Rounded', 13), bg='#111111')
+w.config(fg='#111111', font=('VAG Rounded', 13), bg='white')
 
 # submit button
 submitbtn = Button(window, text="", command=funcs)
 buttonimg = PhotoImage(file="button.png")
-submitbtn.image = buttonimg
 buttonimg2 = PhotoImage(file='button2.png')
-submitbtn.place(relx=0.5, rely=0.5, anchor=CENTER, x=115)
-submitbtn.config(bg='#111111', bd=0, fg='white', font=('VAG Rounded', 13), image=buttonimg, activebackground='#111111')
+buttonimg3 = PhotoImage(file='button5.png')
+submitbtn.image = buttonimg3
+submitbtn.place(relx=0.5, rely=0.5, anchor=CENTER, x=85)
+submitbtn.config(bg='white', bd=0, fg='white', font=('VAG Rounded', 13), image=buttonimg3, activebackground='white')
+
+
+# theme change button
+buttn = Button(window, text="", command=change_theme)
+buttnimg3 = PhotoImage(file="button3.png")
+buttn.image = buttnimg3
+buttnimg4 = PhotoImage(file='button4.png')
+buttn.place(relx=0.5, rely=0.5, anchor=CENTER, x=133)
+buttn.config(bg='white', bd=0, fg='white', font=('VAG Rounded', 13), image=buttnimg3, activebackground='white')
 
 # entry box
 e = Entry()
-e.place(relx=0.5, rely=0.5, anchor=CENTER, x=-33)
-e.config(font=('Arial', 20), bg='#151515', insertbackground='white', fg='white', bd=0, width=15)
+e.place(y=83, x=5)
+e.config(font=('Arial', 20), bg='#fafafa', insertbackground='#111111', fg='#111111', bd=0, width=13)
 e.focus_force()
 
 window.mainloop()
+
+
+atexit.register(exittask)
