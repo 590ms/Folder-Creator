@@ -223,8 +223,7 @@ def change_theme():  # theme change
         w1.config(bg="#111111", fg="white")
         buttn.image = buttnimg4
         dark_title_bar(window)
-        window.geometry(str(window.winfo_width() + 1) + "x" + str(window.winfo_height() + 1))
-        window.geometry(str(window.winfo_width() - 1) + "x" + str(window.winfo_height() - 1))
+
     else:
 
 
@@ -237,8 +236,7 @@ def change_theme():  # theme change
         w1.config(bg="white", fg="#111111")
         buttn.image = buttnimg3
         light_title_bar(window)
-        window.geometry(str(window.winfo_width() + 1) + "x" + str(window.winfo_height() + 1))
-        window.geometry(str(window.winfo_width() - 1) + "x" + str(window.winfo_height() - 1))
+
 
 def funcs(): # combining both change_i and submit func to work together
     change_i()
@@ -255,8 +253,7 @@ p1 = PhotoImage(file='icon.png')
 window.iconphoto(False, p1)
 window.bind('<Return>', enter)
 light_title_bar(window)
-window.geometry(str(window.winfo_width() + 1) + "x" + str(window.winfo_height() + 1))
-window.geometry(str(window.winfo_width() - 1) + "x" + str(window.winfo_height() - 1))
+
 
 # text on screen
 w1 = Label(window, text='Insert folder name or directory:')
