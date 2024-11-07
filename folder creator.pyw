@@ -3,6 +3,7 @@ from datetime import date
 from tkinter import *
 from darktitlebar import *
 import atexit
+import sys
 
 today = date.today()  # getting date
 d4 = today.strftime("%Y")  # setting d4 only as current year
@@ -11,142 +12,16 @@ def exittask():
     os.remove("__pycache__/darktitlebar.cpython-311.pyc")
     os.rmdir("__pycache__")
 
-def monthfolcreate():  # creating month folders
-    newpath = fr'{a}\January'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\February'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\March'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\April '
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\May'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\June'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\July'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\August'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\September'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\October'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\November'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-    newpath = fr'{a}\December'
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
-
-
 def monthcreate():  # creating all date folders
-    jan = 0
-    feb = 0
-    mar = 0
-    apr = 0
-    may = 0
-    jun = 0
-    jul = 0
-    aug = 0
-    sep = 0
-    oct = 0
-    nov = 0
-    dec = 0
+    # List of months with their respective day counts
+    months = [("January", 31), ("February", 28), ("March", 31), ("April", 30),
+              ("May", 31), ("June", 30), ("July", 31), ("August", 31),
+              ("September", 30), ("October", 31), ("November", 30), ("December", 31)]
 
-    for i in range(31):
-        jan = jan + 1
-        newpath = fr'{a}\January\{jan}-1-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(28):
-        feb = feb + 1
-        newpath = fr'{a}\February\{feb}-2-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(31):
-        mar = mar + 1
-        newpath = fr'{a}\March\{mar}-3-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(30):
-        apr = apr + 1
-        newpath = fr'{a}\April\{apr}-4-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(31):
-        may = may + 1
-        newpath = fr'{a}\May\{may}-5-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(30):
-        jun = jun + 1
-        newpath = fr'{a}\June\{jun}-6-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(31):
-        jul = jul + 1
-        newpath = fr'{a}\July\{jul}-7-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(31):
-        aug = aug + 1
-        newpath = fr'{a}\August\{aug}-8-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(30):
-        sep = sep + 1
-        newpath = fr'{a}\September\{sep}-9-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(31):
-        oct = oct + 1
-        newpath = fr'{a}\October\{oct}-10-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(30):
-        nov = nov + 1
-        newpath = fr'{a}\November\{nov}-11-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
-    for i in range(31):
-        dec = dec + 1
-        newpath = fr'{a}\December\{dec}-12-{d4}'
-        if not os.path.exists(newpath):
-            os.makedirs(newpath)
-
+    for i, (month, days) in enumerate(months, start=1):
+        for day in range(1, days + 1):
+            newpath = fr'{a}\{month}\{day}-{i}-{d4}'
+            os.makedirs(newpath, exist_ok=True)
 
 def submit():  # submit button command
     global a
@@ -156,10 +31,9 @@ def submit():  # submit button command
         window.after(2000, window.update())
         os.remove("__pycache__/darktitlebar.cpython-311.pyc")
         os.rmdir("__pycache__")
-        exit()
+        sys.exit()
     monthcreate()
     window.after(1000, window.update())
-    monthfolcreate()
     w.config(text="Folders Created.")
     window.after(2000, window.update())
     os.remove("__pycache__/darktitlebar.cpython-311.pyc")
@@ -167,7 +41,7 @@ def submit():  # submit button command
     open = a
     open = os.path.realpath(open)
     os.startfile(open)
-    exit()
+    sys.exit()
 
 
 def enter(self):  # Return key command
@@ -178,10 +52,9 @@ def enter(self):  # Return key command
         window.after(2000, window.update())
         os.remove("__pycache__/darktitlebar.cpython-311.pyc")
         os.rmdir("__pycache__")
-        exit()
+        sys.exit()
     monthcreate()
     window.after(1000, window.update())
-    monthfolcreate()
     w.config(text="Folders Created.")
     window.after(2000, window.update())
     os.remove("__pycache__/darktitlebar.cpython-311.pyc")
@@ -189,7 +62,7 @@ def enter(self):  # Return key command
     open = a
     open = os.path.realpath(open)
     os.startfile(open)
-    exit()
+    sys.exit()
 
 
 def change_i():  # button img change
